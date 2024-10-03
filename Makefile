@@ -1,5 +1,5 @@
 all: main.o scorePossibilities.o
-	gcc -o driver main.o arrayAdd.o scorePossibilities.o -Wall
+	gcc -o driver main.o scorePossibilities.o -Wall
 
 main.o: main.c
 	gcc -c main.c -Wall
