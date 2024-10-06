@@ -10,24 +10,30 @@ int main() {
 
 		float temperature;
 		int convertFrom, convertTo;
+		int c1, c2, c3 = 0;
 
 		printf("Choose a temperature (no units):\t");
-		scanf("%f", &temperature);
+		c1 = scanf("%f", &temperature);
 		printf("Choose the current units (1) Celcius (2) Farenheit (3) Kelvin:\t");
-		scanf("%d", &convertFrom);
+		c2 = scanf("%d", &convertFrom);
 		printf("Convert to (1) Celcius (2) Farenheit (3) Kelvin:\t");
-		scanf("%d", &convertTo);
+		c3 = scanf("%d", &convertTo);
 
 		bool flag1 = convertFrom < 1 || convertFrom > 3;
 		bool flag2 = convertTo < 1 || convertFrom > 3;
 
-		if (flag1 || flag2) {
+		if (c1 + c2 + c3 != 3) {
+			// This implies at least one calling of scanf recieved a bad value.
+			printf("Those are not valid values that this program can work with!\n");
+		} else if (flag1 || flag2) {
 			printf("Those are not valid values to convert to or from!\n");
 		}
 		else {
 			
 			float convertedTemperature, celciusTemperature;
+			bool validConversion = true;
 
+			// Find the temperature in one standard unit for the purpose of validating it and checking for "extreme values."
 			switch (convertFrom)
 			{
 				case 2:
@@ -41,9 +47,14 @@ int main() {
 					break;
 			}
 			
+			// Find the temperature in the requested units or determine the conversion is invalid.
 			if (convertFrom == convertTo) {
-				printf("There must be some form of conversion; the start and end units cannot be the same.");
-				convertedTemperature = -999;
+				/* 
+					I would rather have simply acknowledged that the start and end of the conversion are the same,
+					Tell the user, and just hand them back the temperature they inputted
+					As if convertedTemperature = temperature
+				*/
+				validConversion = false;
 			} else if (convertFrom == 1 && convertTo == 2) {
 				convertedTemperature = celciusToFarenheit(temperature);
 			} else if (convertFrom == 1 && convertTo == 3) {
@@ -59,10 +70,11 @@ int main() {
 				convertedTemperature = kelvinToFarenheit(temperature);
 			}
 
-			if (IsValidTemperature(celciusTemperature)) {
+			if (IsValidTemperature(celciusTemperature) && validConversion) {
 				/* 
 				  I chose 70 as the threshold for this statement by looking up the hottest
 				  recorded temperature (Death Valley, 57 degrees C), rounding up to the next 10, then adding 10.
+				  Similar logic applies to the lower extreme.
 				*/
 				if (celciusTemperature > 70) {
 					printf("\nThe temperature inputted is quite high; did you use the wrong units or accidentally add an extra zero?\n");
@@ -77,8 +89,12 @@ int main() {
 					WeatherAdvisory(celciusTemperature));
 				ranSuccessfully = true;
 			}
-			else {
+			else if (!IsValidTemperature(celciusTemperature) && validConversion) {
 				printf("You can't have a temperature colder than absolute zero!\n");
+			}
+			else {
+				// Stating that the conversion is invalid has greater priority to stating the temperature is.
+				printf("There must be some form of conversion; the start and end units cannot be the same.\n");
 			}
 		}
 	}

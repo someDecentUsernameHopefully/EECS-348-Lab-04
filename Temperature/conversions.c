@@ -1,6 +1,8 @@
 #include "conversions.h"
 #include <stdbool.h>
 
+// A lot of this is just raw math; I don't know what to tell you.
+
 float celciusToFarenheit(float celcius) {
 	// I don't know how to express 5/9 in a more concise manner, as 5 / 9 itself seems to be rounded.
 	return 32 + (9.0 / 5.0) * celcius;
