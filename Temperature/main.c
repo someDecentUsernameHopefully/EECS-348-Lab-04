@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include "conversions.h"
 #include "responses.h"
+#include "scanReset.h"
 
 int main() {
 
@@ -25,6 +26,7 @@ int main() {
 		if (c1 + c2 + c3 != 3) {
 			// This implies at least one calling of scanf recieved a bad value.
 			printf("Those are not valid values that this program can work with!\n");
+			ScanReset();
 		} else if (flag1 || flag2) {
 			printf("Those are not valid values to convert to or from!\n");
 		}
