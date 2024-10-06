@@ -56,7 +56,7 @@ int main() {
 				convertedTemperature = kelvinToCelcius(temperature);
 			} else {
 				// If this line of code is reached, then (convertFrom == 3 && convertTo == 2) is true.
-				convertedTemperature = kelvinToCelcius(temperature);
+				convertedTemperature = kelvinToFarenheit(temperature);
 			}
 
 			if (IsValidTemperature(celciusTemperature)) {
@@ -66,6 +66,9 @@ int main() {
 				*/
 				if (celciusTemperature > 70) {
 					printf("\nThe temperature inputted is quite high; did you use the wrong units or accidentally add an extra zero?\n");
+				}
+				else if (celciusTemperature < -100) {
+					printf("\nThe temperature inputted is quite low; did you use the wrong units or accidentally add a negative sign?\n");
 				}
 				printf("\nConverted Temperature: %f %c\nTemperature Category: %s\nWeather Advisory: %s\n",
 					convertedTemperature,
