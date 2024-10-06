@@ -2,14 +2,15 @@
 #include <stdbool.h>
 
 float celciusToFarenheit(float celcius) {
-	return 32 + (9 / 5) * celcius;
+	// I don't know how to express 5/9 in a more concise manner, as 5 / 9 itself seems to be rounded.
+	return 32 + (9.0 / 5.0) * celcius;
 }
 
 float celciusToKelvin(float celcius) {
 	return celcius + 273.15;
 }
 float farenheitToCelcius(float farenheit) {
-	return (5 / 9) * (farenheit - 32);
+	return (5.0 / 9.0) * (farenheit - 32);
 }
 float farenheitToKelvin(float farenheit) {
 	return celciusToKelvin(farenheitToCelcius(farenheit));

@@ -42,7 +42,7 @@ int main() {
 			}
 			
 			if (convertFrom == convertTo) {
-				printf("You can't convert a temperature to itself!");
+				printf("There must be some form of conversion; the start and end units cannot be the same.");
 				convertedTemperature = -999;
 			} else if (convertFrom == 1 && convertTo == 2) {
 				convertedTemperature = celciusToFarenheit(temperature);
@@ -60,6 +60,13 @@ int main() {
 			}
 
 			if (IsValidTemperature(celciusTemperature)) {
+				/* 
+				  I chose 70 as the threshold for this statement by looking up the hottest
+				  recorded temperature (Death Valley, 57 degrees C), rounding up to the next 10, then adding 10.
+				*/
+				if (celciusTemperature > 70) {
+					printf("\nThe temperature inputted is quite high; did you use the wrong units or accidentally add an extra zero?\n");
+				}
 				printf("\nConverted Temperature: %f %c\nTemperature Category: %s\nWeather Advisory: %s\n",
 					convertedTemperature,
 					TemperatureUnit(convertTo),
