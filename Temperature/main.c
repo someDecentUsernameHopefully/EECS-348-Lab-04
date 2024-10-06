@@ -14,17 +14,34 @@ int main() {
 
 		printf("Choose a temperature (no units):\t");
 		c1 = scanf("%f", &temperature);
-		printf("Choose the current units (1) Celcius (2) Farenheit (3) Kelvin:\t");
-		c2 = scanf("%d", &convertFrom);
-		printf("Convert to (1) Celcius (2) Farenheit (3) Kelvin:\t");
-		c3 = scanf("%d", &convertTo);
+
+		// These if statements just prevent the program from getting more user input if the previous input is already invalid.
+		if (c1) {
+			printf("Choose the current units (1) Celcius (2) Farenheit (3) Kelvin:\t");
+			c2 = scanf("%d", &convertFrom);
+		}
+
+		if (c1 && c2) {
+			printf("Convert to (1) Celcius (2) Farenheit (3) Kelvin:\t");
+			c3 = scanf("%d", &convertTo);
+		}
 
 		bool flag1 = convertFrom < 1 || convertFrom > 3;
 		bool flag2 = convertTo < 1 || convertFrom > 3;
 
-		if (c1 + c2 + c3 != 3) {
+		if (!c1 || !c2 || !c3) {
 			// This implies at least one calling of scanf recieved a bad value.
 			printf("Those are not valid values that this program can work with!\n");
+
+			/*
+				After briefly researching scanf online, it seems the behavior for scanf is to leave
+				any invalid input such that future scanf calls also run into the same problem
+
+				The following code eats that value such that future scanf calls don't see it.
+				I don't know what steps I have to take regarding memory stuff, as I don't think C has garbage collection
+			*/
+			char garbage;
+			scanf("%s", &garbage);
 		} else if (flag1 || flag2) {
 			printf("Those are not valid values to convert to or from!\n");
 		}
