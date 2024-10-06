@@ -15,18 +15,22 @@ int main() {
 
 		printf("Choose a temperature (no units):\t");
 		c1 = scanf("%f", &temperature);
-		printf("Choose the current units (1) Celcius (2) Farenheit (3) Kelvin:\t");
-		c2 = scanf("%d", &convertFrom);
-		printf("Convert to (1) Celcius (2) Farenheit (3) Kelvin:\t");
-		c3 = scanf("%d", &convertTo);
+		if (c1) {
+			printf("Choose the current units (1) Celcius (2) Farenheit (3) Kelvin:\t");
+			c2 = scanf("%d", &convertFrom);
+		}
+		if (c1 && c2) {
+			printf("Convert to (1) Celcius (2) Farenheit (3) Kelvin:\t");
+			c3 = scanf("%d", &convertTo);
+		}
 
 		bool flag1 = convertFrom < 1 || convertFrom > 3;
 		bool flag2 = convertTo < 1 || convertFrom > 3;
 
-		if (c1 + c2 + c3 != 3) {
+		if (!c1 || !c2 || !c3) {
 			// This implies at least one calling of scanf recieved a bad value.
 			printf("Those are not valid values that this program can work with!\n");
-			ScanReset();
+			scanReset();
 		} else if (flag1 || flag2) {
 			printf("Those are not valid values to convert to or from!\n");
 		}

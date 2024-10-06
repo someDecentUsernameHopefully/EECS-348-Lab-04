@@ -1,6 +1,6 @@
 #ifndef ScanReset_H
 #define ScanReset_H
 
-void ScanReset();
+void scanReset();
 
 #endif
