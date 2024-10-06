@@ -22,7 +22,7 @@ int main() {
 		bool flag2 = convertTo < 1 || convertFrom > 3;
 
 		if (flag1 || flag2) {
-			printf("Those are not valid values to convert to or from!");
+			printf("Those are not valid values to convert to or from!\n");
 		}
 		else {
 			
@@ -60,7 +60,7 @@ int main() {
 			}
 
 			if (IsValidTemperature(celciusTemperature)) {
-				printf("Converted Temperature: %f %c\nTemperature Category: %s\nWeather Advisory: %s\n",
+				printf("\nConverted Temperature: %f %c\nTemperature Category: %s\nWeather Advisory: %s\n",
 					convertedTemperature,
 					TemperatureUnit(convertTo),
 					TemperatureCategory(celciusTemperature),
